@@ -3,7 +3,7 @@
 ## Project Overview
 This is a comprehensive SQL script for managing an electronics and appliances business database. It includes the creation and population of three tables: Customers, Orders, and Products. Key SQL queries include: retrieve customers, price adjustment, revenue analysis and product information key skills include: data insertion and updating, joining tables, and data aggregation and analysis.
 
-## Technologies Used
+## Technology Used
 SQL
 
 ## Setup and Installation
@@ -14,9 +14,9 @@ SQL
 The SQL code for this project is divided into several sections:
 
 1) Creating Tables:
-   Customers: Stores information about customers.
-   Orders: Records orders placed by customers.
-   Products: Contains information about available products.
+   1. Customers: Stores information about customers.
+   2. Orders: Records orders placed by customers.
+   3. Products: Contains information about available products.
 2) Inserting Data:
    Populates the Customers, Orders, and Products tables with sample data.
 3) SQL Queries:
