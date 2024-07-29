@@ -1,0 +1,127 @@
+-- This is an exmaple of using SQL in a real-life scenario for a business that sells electronics and appliances
+-- I will start by creating and populating 3 different tables
+-- The first table contains information about their customers
+CREATE TABLE Customers (
+    customer_id INT NOT NULL,  
+    customer_name VARCHAR(50),  
+    email_address VARCHAR(50),  
+    mobile_number VARCHAR(20),  
+    customer_age INT,  
+    join_date DATE, 
+    PRIMARY KEY (customer_id)
+);
+
+INSERT INTO Customers
+    VALUES (315, 'John Wayne', 'jw06051998@outlook.com','07123987650', 26, '2024-01-09'),  
+           (144, 'James Green', 'professionaljg@yahoo.com', '07712324509', 41, '2020-09-18'),  
+           (791, 'Amy Fields', 'amykarenfields@outlook.com', '07388417501', 29, '2021-03-03'),  
+           (512, 'Ella Anderson', 'andersone323@gmail.com', '07992713255', 24, '2024-04-28'),  
+           (032, 'Mia Smith', 'smithmia1005@gmail.com', '07323019876', 27, '2020-12-13'),  
+           (799, 'Michelle Kim', 'michelleishername@yahoo.com', '07656214902', 19, '2023-06-13'),  
+           (408, 'Sanjay Khan', 'sanjaykhan@outlook.com', '07713792899', 37, '2020-12-07'),  
+           (076, 'Andrew Blake', 'kdg39284661@gmail.com', '07110246200', 35, '2021-09-30'),  
+           (508, 'Harry Weeks', '801392hw@hotmail.com', '07109394271', 21, '2022-04-29'),  
+           (619, 'Eva Chavez', 'evachavez0915@gmail.com', '07369022565', 43, '2024-02-23');
+
+-- The second table will represent the record of orders placed by their customers
+-- The time frame is from 01/03/2024 to 01/04/2024
+CREATE TABLE Orders(
+    order_number INT NOT NULL,  
+    customer_id INT NOT NULL,  
+    order_date DATE,  
+    order_total_GBP DECIMAL(5, 2), 
+    order_details VARCHAR(255), 
+    PRIMARY KEY (order_number, customer_id),
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
+);
+
+INSERT INTO Orders
+    VALUES (02847, 315, '2024-03-01', 119.98, 'Timer, Desktop Speaker'),  
+           (93028, 144, '2024-03-02', 79.98, 'Kettle,   Toaster'),  
+           (13130, 791, '2024-03-03', 19.99, 'Adaptor'),  
+           (09720, 512, '2024-03-06', 189.99, 'Toaster, Headphones, Airfryer'),  
+           (17656, 619, '2024-03-08', 129.98, 'Desktop Speaker, Rice Cooker'),  
+           (22361, 144, '2024-03-11', 62.98, 'Electric Thermometer, Airfryer'),  
+           (62188, 032, '2024-03-25', 109.98, 'Portable Radio, Airfryer'),  
+           (45290, 799, '2024-03-27', 59.99, 'Portable Radio'),  
+           (32346, 408, '2024-03-27', 52.98, 'Blender, Electric Thermometer'),  
+           (87891, 315, '2024-03-28', 99.99, 'Desktop Speaker'),  
+           (11717, 144, '2024-03-29', 40.99, 'Keyboard'),  
+           (41107, 619, '2024-03-30', 19.99, 'Adaptor'),  
+           (34727, 408, '2024-03-31', 119.98, 'Kettle, Rice Cooker'),  
+           (59175, 076, '2024-04-01', 109.98, 'Headphones, Adaptor'),  
+           (10729, 508, '2024-04-01', 49.99, 'Toaster'),  
+           (99321, 619, '2024-04-01', 149.98, 'Desktop Speaker, Airfryer');
+
+-- The third table will contain information of their available products
+CREATE TABLE Products(
+    product_id INT NOT NULL,  
+    product_name VARCHAR(255),  
+    category VARCHAR(255),  
+    price_in_GBP DECIMAL (5, 2), 
+    stock_count INT, 
+    PRIMARY KEY (product_id)
+);
+
+INSERT INTO Products
+    VALUES (4122, 'Kettle', 'Kitchen Appliances', 29.99, 310),  
+           (0288, 'Toaster', 'Kitchen Appliances', 49.99, 176),  
+           (7611, 'Desktop Speaker', 'Electronics', 99.99, 265),  
+           (5091, 'Timer', 'Electronics', 19.99, 410),  
+           (5224, 'Blender', 'Kitchen Appliances', 39.99, 198),  
+           (8109, 'Headphones', 'Electronics', 89.99, 339),  
+           (1792, 'Portable Radio', 'Electronics', 59.99, 102),  
+           (7016, 'Adaptor', 'Electronics', 19.99, 54),  
+           (0397, 'Rice Cooker', 'Kitchen Appliances', 29.99, 201),  
+           (8011, 'Keyboard', 'Electronics', 40.99, 130),  
+           (2953, 'Electric thermometer', 'Kitchen Appliances', 12.99, 197),  
+           (3237, 'Airfryer', 'Kitchen Appliances', 49.99, 302);
+           
+-- Retrieve all customers who joined after January 1st, 2022
+SELECT * FROM Customers WHERE join_date > '2022-01-01';
+
+-- Update the email address of the customer with the customer ID 508
+UPDATE Customers
+SET email_address = 'harrybweeks@gmail.com'
+WHERE customer_id = 508;
+
+-- Find the total number of orders placed by each customer from 01/03/2024 to 01/04/2024
+-- In order to work out who their best customer is in that time frame
+SELECT customer_id, COUNT(order_number) AS total_orders
+FROM Orders
+WHERE order_date BETWEEN '2024-03-01' AND '2024-04-01'
+GROUP BY customer_id;
+
+-- Find all the products that are in the 'Electronics' category
+SELECT * From Products Where category = 'Electronics';
+
+-- Find the total order amount for each customer
+SELECT c.customer_name, SUM(o.order_total_GBP) AS total_order_amount
+FROM Customers c
+JOIN Orders o ON c.customer_id = o.customer_id
+GROUP BY c.customer_name;
+
+-- Select the top 5 products with the most stock quantity
+SELECT * FROM Products
+ORDER BY stock_count DESC
+LIMIT 5;
+
+-- Find the average age of all the customers that have placed an order over 100 GBP
+SELECT AVG(c.customer_age) AS average_age
+FROM Customers c
+JOIN Orders o ON c.customer_id = o.customer_id
+WHERE o.order_total_GBP > 100;
+
+-- Increase the price of all products in the 'Kitchen Appliances' category by 10%
+UPDATE Products
+SET price_in_GBP = price_in_GBP * 1.10
+WHERE category = 'Kitchen Appliances';
+SELECT * FROM Products WHERE category = 'Kitchen Appliances';
+-- Verify the price increase
+
+-- Find the total number of orders and the total revenue between 01/03/2024 and 01/04/2024
+SELECT 
+    COUNT(order_number) AS total_orders,  
+    SUM(order_total_GBP) AS total_revenue
+FROM 
+    Orders;
