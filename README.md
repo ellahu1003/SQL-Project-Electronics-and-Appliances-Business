@@ -6,6 +6,20 @@ This is a comprehensive SQL script for managing an electronics and appliances bu
 ## Technology Used
 SQL
 
+## Methodology
+1) Data Collection:
+   
+   The project simulates a real-life scenario for a business that sells electronics and appliances by creating and populating three different SQL tables: Customers, Orders, and Products. The data for these tables is generated randomly for demonstration purposes only.
+
+2) Table Creation and Data Insertion:
+   1. Customers Table: The Customers table was created to store customer information such as ID, name, email address, mobile number, age, and join date. Sample data was inserted to represent various customers.
+   2. Orders Table: The Orders table was designed to record orders placed by customers, including details like order number, customer ID, order date, total amount, and order details. Sample data was inserted to represent orders placed within a specific timeframe.
+   3. Products Table: The Products table holds information about available products, including product ID, name, category, price, and stock count. Sample data was inserted to represent the various products available for sale.
+
+3) Queries for Data Retrieval and Analysis:
+   
+   Key SQL queries are performed to analyse business data, including selecting recent customers, updating customer information, counting total orders per customer, retrieving electronics category products, and determining total orders and revenue within a specific timeframe. These queries provide critical insights into customer behaviour, product inventory, and overall business performance.
+
 ## Setup and Installation
 1) Ensure that there is a SQL database setup (e.g., MySQL, PostgreSQL).
 2) Download and execute the provided SQL script ('electronics_appliances.txt') in your database environment.
