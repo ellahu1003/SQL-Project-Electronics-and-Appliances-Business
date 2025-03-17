@@ -1,7 +1,7 @@
 # SQL-Project-Electronics-and-Appliances-Business
 
 ## Project Overview
-This is a comprehensive SQL script for managing an electronics and appliances business database. It includes the creation and population of three tables: Customers, Orders, and Products. Key SQL queries include: retrieve customers, price adjustment, revenue analysis and product information key skills include: data insertion and updating, joining tables, and data aggregation and analysis.
+This is a comprehensive SQL script for managing an electronics and appliances business database. It includes the creation and population of three tables: Customers, Orders, and Products. Key SQL queries include: retrieve customers, price adjustment, revenue analysis and product information. Key skills include: data insertion and updating, joining tables, and data aggregation and analysis.
 
 ## Technology Used
 SQL
